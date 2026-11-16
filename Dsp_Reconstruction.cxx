@@ -172,7 +172,8 @@ struct Distance2Minimization {
 
 int main(int argc, char **argv)
 {
-  TString listname = "DISepInputFiles_q2_1to10_L501To1000.list";
+  TString listname = "DISepInputFiles_q2_100to1000_try2_L3501To4081.list";
+  //TString listname = "DISeAuInputFiles_q2_100to10000_L11001To12366.list";
 
   TChain *chain = new TChain("events");
 
@@ -216,6 +217,13 @@ int main(int argc, char **argv)
   hEventStat->GetXaxis()->SetBinLabel(9, "Reco Signal D_{s}^{+}");
   hEventStat->GetXaxis()->SetBinLabel(10, "Reco Signal D_{s}^{-}");
   hEventStat->GetXaxis()->SetBinLabel(11, "Reco Bkg D_{s}^{+}");
+  
+  TH1F *hEventQ2 = new TH1F("hEventQ2", "Event statistics", 5, 0, 5);
+  hEventQ2->GetXaxis()->SetBinLabel(1, "MC events");
+  hEventQ2->GetXaxis()->SetBinLabel(2, "Q^{2}:1-10");
+  hEventQ2->GetXaxis()->SetBinLabel(3, "Q^{2}:10-100");
+  hEventQ2->GetXaxis()->SetBinLabel(4, "Q^{2}:100-1000");
+  hEventQ2->GetXaxis()->SetBinLabel(5, "Q^{2}:1000-INF");
 
   TH1F *hMcMult = new TH1F("hMcMult", "MC multiplicity (|#eta| < 3.5);N_{MC}", 50, 0, 50);
 
@@ -389,7 +397,8 @@ int main(int argc, char **argv)
 
   //TFile *outfile = new TFile("DsNtuple_eAu.root", "RECREATE");
   //TFile *outfile = new TFile("DsNtuple_ep_2000To2399.root", "RECREATE");
-  TFile *outfile = new TFile("DISNtuple_ep_q2_1to10_L501To1000.root", "RECREATE");
+  TFile *outfile = new TFile("DISNtuple_ep_q2_100to1000_try2_L3501To4081.root", "RECREATE");
+  //TFile *outfile = new TFile("DISeAuInputFiles_q2_100to10000_L11001To12366.root", "RECREATE");
   outfile->cd();
 
   // Create a ROOT file to store the Ntuple
@@ -517,6 +526,13 @@ int main(int argc, char **argv)
       Q2_mc = incQ2[0];
       xB_mc = incxB[0];
     }
+
+    hEventQ2->Fill(0.5); // All events
+    if (Q2_mc >= 1 && Q2_mc < 10) hEventQ2->Fill(1.5); // 1 <= Q2 < 10
+    else if (Q2_mc >= 10 && Q2_mc < 100) hEventQ2->Fill(2.5); // 10 <= Q2 < 100
+    else if (Q2_mc >= 100 && Q2_mc < 1000) hEventQ2->Fill(3.5); //100 <= Q2 < 1000
+    else if (Q2_mc >= 1000) hEventQ2->Fill(4.5); // Q2 >= 1000
+
     int nMCPart = mcPartMass.GetSize();
 
     TVector3 vertex_mc(-999., -999., -999.);
@@ -1159,6 +1175,7 @@ int main(int argc, char **argv)
   tree_bkg->Write();
   tree_Dsp->Write();
   hEventStat->Write();
+  hEventQ2->Write();
   /*hMcMult->Write();
   hMcVtxX->Write();
   hMcVtxY->Write();

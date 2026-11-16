@@ -2,7 +2,10 @@
 
 #outfile="DsepInputFiles.list"
 #outfile="DseAuInputFiles.list"
-outfile="DISepInputFiles_q2_1000toINF.list"
+#outfile="DISepInputFiles_q2_1000toINF_1.list"
+#outfile="DISeAuInputFiles_q2_100to10000.list"
+#outfile="list/D0epInputFiles.list"
+outfile="list/D0eAuInputFiles.list"
 
 get_files () {
   DID=$1
@@ -17,24 +20,37 @@ get_files () {
   rucio replica list file --pfns --rses "$RSE" "$DID"
 }
 
-echo "Running Ds filtered sample..."
+echo "Running D0 filtered sample..."
+#echo "Running Ds filtered sample..."
+#echo "Running DIS sample..."
 
 #get_files "epic:/RECO/26.07.1/epic_craterlake/SIDIS/Ds_ABCONV/HFsim-PYTHIA/pythia8.316-1.1/ep/9x275/q2_1" > $outfile
 #get_files "epic:/RECO/26.07.1/epic_craterlake/SIDIS/Ds_ABCONV/HFsim-BeAGLE/BeAGLE1.03.02-1.0/eAu/9x100/q2_1" > $outfile
 
-get_files "epic:/RECO/26.07.1/epic_craterlake/DIS/pythia8.316-1.0/NC/noRad/ep/9x275/q2_1000toINF" > $outfile
+#get_files "epic:/RECO/26.07.1/epic_craterlake/DIS/pythia8.316-1.0/NC/noRad/ep/9x275/q2_1000toINF" > $outfile
+#get_files "epic:/RECO/26.07.1/epic_craterlake/DIS/BeAGLE1.03.02-3.1/eAu/9x100/q2_100to10000" > $outfile
 
+#get_files "epic:/RECO/26.07.1/epic_craterlake/SIDIS/D0_ABCONV/HFsim-PYTHIA/pythia8.316-1.0/ep/9x275/q2_1" > $outfile
+get_files "epic:/RECO/26.07.1/epic_craterlake/SIDIS/D0_ABCONV/HFsim-BeAGLE/BeAGLE1.03.02-1.0/eAu/9x100/q2_1" > $outfile
 
 #epic:/RECO/26.07.1/epic_craterlake/SIDIS/Ds_ABCONV/HFsim-PYTHIA/pythia8.316-1.1/ep/9x275/q2_1
 #epic:/RECO/26.07.1/epic_craterlake/DIS/pythia8.316-1.0/NC/noRad/ep/9x275/q2_1to10
+#epic:/RECO/26.07.1/epic_craterlake/try2/DIS/pythia8.316-1.0/NC/noRad/ep/9x275/q2_1to10
 #epic:/RECO/26.07.1/epic_craterlake/DIS/pythia8.316-1.0/NC/noRad/ep/9x275/q2_10to100
+#epic:/RECO/26.07.1/epic_craterlake/try4/DIS/pythia8.316-1.0/NC/noRad/ep/9x275/q2_10to100
 #epic:/RECO/26.07.1/epic_craterlake/DIS/pythia8.316-1.0/NC/noRad/ep/9x275/q2_100to1000
+#epic:/RECO/26.07.1/epic_craterlake/try2/DIS/pythia8.316-1.0/NC/noRad/ep/9x275/q2_100to1000
 #epic:/RECO/26.07.1/epic_craterlake/DIS/pythia8.316-1.0/NC/noRad/ep/9x275/q2_1000toINF
 
 #epic:/RECO/26.07.1/epic_craterlake/SIDIS/Ds_ABCONV/HFsim-BeAGLE/BeAGLE1.03.02-1.0/eAu/9x100/q2_1
-#epic:/RECO/26.07.1/epic_craterlake/DIS/BeAGLE1.03.02-3.1/eAu/9x100/q2_100to10000
-#epic:/RECO/26.07.1/epic_craterlake/DIS/BeAGLE1.03.02-3.1/eAu/9x100/q2_10to100
 #epic:/RECO/26.07.1/epic_craterlake/DIS/BeAGLE1.03.02-3.1/eAu/9x100/q2_1to10
+#epic:/RECO/26.07.1/epic_craterlake/DIS/BeAGLE1.03.02-3.1/eAu/9x100/q2_10to100
+#epic:/RECO/26.07.1/epic_craterlake/DIS/BeAGLE1.03.02-3.1/eAu/9x100/q2_100to10000
 
 #epic:/RECO/26.04.1/epic_craterlake/SIDIS/Lc_ABCONV/HFsim-PYTHIA/pythia8.312-2.0/ep/10x250/q2_1
 #epic:/RECO/26.04.1/epic_craterlake/DIS/pythia6.428-1.0/NC/noRad/ep/10x250/q2_10to100
+
+#epic:/RECO/26.07.1/epic_craterlake/SIDIS/D0_ABCONV/HFsim-PYTHIA/pythia8.316-1.0/ep/9x275/q2_1
+#epic:/RECO/26.07.1/epic_craterlake/SIDIS/D0_ABCONV/HFsim-BeAGLE/BeAGLE1.03.02-1.0/eAu/9x100/q2_1
+
+#rucio did list --short "epic:/RECO/26*/*10x250*"
